@@ -4,13 +4,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import service.TestDataReader;
 
 public class MainPage extends AbstractPage {
 
     private static final Logger logger = LoggerFactory.getLogger(MainPage.class);
-    private final String BASE_URL = "https://www.saucedemo.com/inventory.html";
+    private final String BASE_URL = TestDataReader.getTestData("testdata.mainpage.url");
 
     @FindBy(css = ".app_logo")
     private WebElement mainPageTitle;
@@ -25,10 +27,13 @@ public class MainPage extends AbstractPage {
 
     public MainPage(WebDriver driver) {
         super(driver);
-        PageFactory.initElements(this.driver, this);
     }
 
     public String getTitleLoggedInUser() {
-        return mainPageTitle.getText();
+        logger.info("Retrieving main page title...");
+        wait.until(ExpectedConditions.visibilityOf(mainPageTitle));
+        String title = mainPageTitle.getText();
+        logger.info("Retrieved main page title: '{}'", title);
+        return title;
     }
 }

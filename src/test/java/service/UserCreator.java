@@ -41,17 +41,4 @@ public class UserCreator {
         String password = TestDataReader.getTestData(TESTDATA_USER_PASSWORD);
         return new User(username, password);
     }
-
-    /*
-    // iF I will need empty Username or Password
-    public static User withEmptyUsername(){
-        return new User("", TestDataReader.getTestData(TESTDATA_USER_PASSWORD));
-    }
-
-    public static User withEmptyPassword(){
-        return new User(TestDataReader.getTestData(TESTDATA_USER_NAME), "");
-    }
-     */
-
-
 }
